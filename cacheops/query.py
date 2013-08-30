@@ -144,7 +144,7 @@ def _stringify_query():
 
     attrs = {}
     attrs[WhereNode] = attrs[ExpressionNode] \
-        = ('connector', 'negated', 'children', 'subtree_parents')
+        = ('connector', 'negated', 'children')
     attrs[SQLEvaluator] = ('expression',)
     attrs[ExtraWhere] = ('sqls', 'params')
     attrs[Aggregate] = ('source', 'is_summary', 'col', 'extra')

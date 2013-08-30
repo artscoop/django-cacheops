@@ -193,6 +193,7 @@ def _stringify_query():
             return json.dumps(query, default=encode_object, skipkeys=True,
                                      sort_keys=True, separators=(',',':'))
         except TypeError as e:
+            raise
             raise ValueError(*e.args)
 
     return stringify_query

@@ -190,10 +190,11 @@ def _stringify_query():
         # HACK: Catch TypeError and reraise it as ValueError
         #       since django hides it and behave weird when gets a TypeError in Queryset.iterator()
         try:
+            print query, encode_object
             return json.dumps(query, default=encode_object, skipkeys=True,
                                      sort_keys=True, separators=(',',':'))
         except TypeError as e:
-            raise
+            return query
             raise ValueError(*e.args)
 
     return stringify_query
@@ -236,7 +237,6 @@ class QuerySetMixin(object):
         md5 = hashlib.md5()
         md5.update(str(self.__class__))
         md5.update(stamp_fields(self.model)) # Protect from field list changes in model
-        print self.query
         md5.update(stringify_query(self.query))
         if extra:
             md5.update(str(extra))
